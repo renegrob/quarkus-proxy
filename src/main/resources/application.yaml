@@ -1,0 +1,16 @@
+quarkus:
+  http:
+    ssl-port: 8443
+    access-log:
+      enabled: true
+  log:
+    min-level: TRACE
+    level: INFO
+    category:
+      'io.quarkus.http.access-log':
+        level: INFO
+server:
+  default-charset: utf-8
+  errors:
+    - status-code: 400-499
+      template: default-default-4xx.html

@@ -1,0 +1,25 @@
+quarkus:
+  log:
+    min-level: TRACE
+    level: INFO
+    category:
+      'io.github.renegrob':
+        level: TRACE
+      'io.vertx.ext.web.handler.impl':
+        level: TRACE
+server:
+  default-charset: utf-8
+  paths:
+    - path: /static/
+      static:
+        directory: src/test/resources
+        index: index.html
+    - path: /users
+      proxy:
+        remote-uri: https://random-data-api.com/api/v2/users
+    - path: /geoip
+      proxy:
+        remote-uri: https://api.techniknews.net/ipgeo/
+  errors:
+    - status-code: 400-499
+      template:  4xx-test.html

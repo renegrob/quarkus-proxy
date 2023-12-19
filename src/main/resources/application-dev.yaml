@@ -1,0 +1,30 @@
+quarkus:
+  http:
+    ssl-port: 8443
+    access-log:
+      enabled: true
+  log:
+    min-level: TRACE
+    level: INFO
+    category:
+      'io.quarkus.http.access-log':
+        level: INFO
+server:
+  default-charset: utf-8
+  paths:
+    - path: /users
+      proxy:
+        remote-uri: https://random-data-api.com/api/v2/users
+    - path: /geoip
+      proxy:
+        remote-uri: https://api.techniknews.net/ipgeo/
+    - path: /wiki
+      proxy:
+        remote-uri: https://ja.wikipedia.org/wiki
+    - path: /static
+      static:
+        directory: ../../../../src/test/resources
+        index: index.html
+  errors:
+    - status-code: 400-499
+      template:  default-default-4xx.html
